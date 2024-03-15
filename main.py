@@ -5,7 +5,7 @@ class HelloWorld(Scene):
     def construct(self):
         hello = MathTex(r"\text{Hello World!}")
         circle = Circle()  # create a circle
-        circle.set_fill(PINK, opacity=0.5)  # set the color and transparency
+        circle.set_fill(GREEN, opacity=0.5)  # set the color and transparency
         square = Square(side_length=2.0, color=BLUE, fill_color=TEAL, fill_opacity=0.5)
         welcome = MathTex(r"\text{Welcome to MAA SE 2024!}")
 
@@ -17,6 +17,9 @@ class HelloWorld(Scene):
         self.wait(3)
         self.play(Transform(hello, welcome))
         self.wait(5)
+        name = MathTex(r"\text{My name is LAURIE.}")
+        self.play(Transform(hello, name))
+        self.wait(8)
 
 
 class TanLine(Scene):
@@ -25,8 +28,11 @@ class TanLine(Scene):
 
         ################# SETUP ########################
 
+        px = 2
+        py = 3/4*px-3*(px)**(1/2)-1
+
         #Create Title
-        title = MathTex(r"\text{Consider the curve   }y=", r"\psi(x)=\frac{3}{4}x-3\sqrt{x}-3.", r"\text{  Find the line tangent to this curve when }", r"x=1", r".").scale(0.6).to_edge(UP)        
+        title = MathTex(r"\text{Consider the curve   }y=", r"\psi(x)=\frac{3}{4}x-3\sqrt{x}-3.", r"\text{  Find the line tangent to this curve when }", "x=", px).scale(0.6).to_edge(UP)        
         #Set the function blue and the x value green
         title[1].set_color(BLUE)
         title[3].set_color(GREEN)
@@ -52,8 +58,9 @@ class TanLine(Scene):
         plot1 = axes.plot(lambda x: 3/4*x-3*(x)**(1/2)-1,  x_range=[xmin, xmax, 0.01], color=YELLOW)
         
         #Create a point and a label by the point
-        p0 = Dot(axes.c2p(1,-13/4), color=BLUE)
-        label0 = MathTex(r"(1,-13/4)", color=BLUE).scale(0.4).next_to(p0, UP+RIGHT)
+        
+        p0 = Dot(axes.c2p(px,py), color=BLUE)
+        label0 = MathTex(r"(2,?)", color=BLUE).scale(0.4).next_to(p0, UP+RIGHT)
 
         #Create tanline
         tanline = axes.plot(lambda x: -3/4*(x-1)-13/4,  x_range=[xmin, xmax, 0.01], color=GREEN)
